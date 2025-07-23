@@ -1,43 +1,3 @@
-// import { Cloud } from "lucide-react"
-
-// export function CurrentWeatherDisplay({
-//   currentTime,
-//   currentDate,
-//   currentTemp,
-//   currentDescription,
-//   currentHumidity,
-//   currentWindSpeed,
-// }) {
-//   return (
-//     <div className="current-weather-display">
-//       <div className="time-date">
-//         {currentTime}, {currentDate}
-//       </div>
-//       <div className="temp-icon-group">
-//         <Cloud className="weather-icon" />
-//         <div className="temperature">
-//           {currentTemp}
-//           <span className="temp-unit">°F</span>
-//         </div>
-//       </div>
-//       <div className="description">{currentDescription}</div>
-//       <div className="details-group">
-//         <div className="detail-item">
-//           <span className="detail-label">Humidity</span>
-//           <span>{currentHumidity}%</span>
-//         </div>
-//         <div className="detail-item">
-//           <span className="detail-label">Wind speed</span>
-//           <span>{currentWindSpeed} km/j</span>
-//         </div>
-//       </div>
-//     </div>
-//   )
-// }
-
-
-import { mapConditionToIcon } from "../lib/weather-utils"
-
 export function CurrentWeatherDisplay({
   currentTime,
   currentDate,
@@ -45,22 +5,28 @@ export function CurrentWeatherDisplay({
   currentDescription,
   currentHumidity,
   currentWindSpeed,
+  currentIconUrl
 }) {
-  const WeatherIconComponent = mapConditionToIcon(currentDescription) 
-
   return (
     <div className="current-weather-display">
       <div className="time-date">
         {currentTime}, {currentDate}
       </div>
-      <div className="temp-icon-group">
-        {WeatherIconComponent && <WeatherIconComponent className="weather-icon" />}
+
+      <div className="temp-icon-group" style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <img
+          src={currentIconUrl}
+          alt={currentDescription}
+          style={{ width: "64px", height: "64px", marginBottom: "0.5rem" }}
+        />
         <div className="temperature">
-          {Math.round(currentTemp)} {/* Round temperature for cleaner display */}
+          {Math.round(currentTemp)}
           <span className="temp-unit">°F</span>
         </div>
       </div>
+
       <div className="description">{currentDescription}</div>
+
       <div className="details-group">
         <div className="detail-item">
           <span className="detail-label">Humidity</span>
